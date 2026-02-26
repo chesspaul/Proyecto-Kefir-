@@ -19,11 +19,15 @@ function Productos() {
             <div className="card shadow-sm h-100 producto-card">
               <img src={producto1} className="card-img-top" alt="Plástico 1L" />
               <div className="card-body text-center">
-                <h6 className="fw-bold">Botella de Plástico 1 Litro</h6>
+                <h5 className="card-title">Botella de Plástico 1 Litro</h5>
+                
                 <p className="text-muted small">
-                  Presentación práctica ideal para consumo familiar.
+                  Presentación ideal para consumir en familia.
                 </p>
-                <a href="#contacto" className="btn btn-success btn-sm">
+
+                <p className="text-success fw-bold fs-5">$110 MXN</p>
+
+                <a href="#contacto" className="btn btn-success">
                   Comprar
                 </a>
               </div>
@@ -35,11 +39,15 @@ function Productos() {
             <div className="card shadow-sm h-100 producto-card">
               <img src={producto2} className="card-img-top" alt="Vidrio 1L" />
               <div className="card-body text-center">
-                <h6 className="fw-bold">Botella de Vidrio 1 Litro</h6>
+                <h5 className="card-title">Botella de Vidrio 1 Litro</h5>
+
                 <p className="text-muted small">
-                  Presentación premium que conserva mejor la frescura.
+                  Presentación premium del kéfir. Logra conservar mejor la frescura y sabor.
                 </p>
-                <a href="#contacto" className="btn btn-success btn-sm">
+
+                <p className="text-success fw-bold fs-5">$150 MXN</p>
+
+                <a href="#contacto" className="btn btn-success">
                   Comprar
                 </a>
               </div>
@@ -51,11 +59,15 @@ function Productos() {
             <div className="card shadow-sm h-100 producto-card">
               <img src={producto3} className="card-img-top" alt="Vidrio 500ml" />
               <div className="card-body text-center">
-                <h6 className="fw-bold">Botella de Vidrio 500 ml</h6>
+                <h5 className="card-title">Botella de Vidrio 500 ml</h5>
+
                 <p className="text-muted small">
                   Tamaño individual ideal para consumo diario.
                 </p>
-                <a href="#contacto" className="btn btn-success btn-sm">
+
+                <p className="text-success fw-bold fs-5">$80 MXN</p>
+
+                <a href="#contacto" className="btn btn-success">
                   Comprar
                 </a>
               </div>
@@ -67,11 +79,15 @@ function Productos() {
             <div className="card shadow-sm h-100 producto-card">
               <img src={producto4} className="card-img-top" alt="Plástico 500ml" />
               <div className="card-body text-center">
-                <h6 className="fw-bold">Botella de Plástico 500 ml</h6>
+                <h5 className="card-title">Botella de Plástico 500 ml</h5>
+
                 <p className="text-muted small">
-                  Opción ligera y práctica para llevar.
+                  Opción ligera y práctica para llevar y disfrutar.
                 </p>
-                <a href="#contacto" className="btn btn-success btn-sm">
+
+                <p className="text-success fw-bold fs-5">$65 MXN</p>
+
+                <a href="#contacto" className="btn btn-success">
                   Comprar
                 </a>
               </div>

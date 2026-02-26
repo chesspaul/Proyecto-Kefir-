@@ -14,7 +14,7 @@ function Logotipo() {
         <h2 className="fw-bold mb-3">Nuestra Marca</h2>
 
         <p className="text-muted mx-auto" style={{ maxWidth: "700px" }}>
-          En Kefir Natural elaboramos productos artesanales ricos en probióticos,
+          En Kefir Balance elaboramos productos artesanales ricos en probióticos,
           ideales para fortalecer tu sistema digestivo y mejorar tu bienestar
           general. Calidad, frescura y salud en cada botella.
         </p>

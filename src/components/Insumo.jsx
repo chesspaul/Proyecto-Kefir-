@@ -77,6 +77,14 @@ const Insumo = () => {
             <a href="#contacto" className="btn btn-success mt-3">
               Solicitar información
             </a>
+            <a
+                href="https://www.youtube.com/watch?v=-v0EA-9z3QY"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline-success mt-2 ms-2"
+            >
+              ¿Qué son los búlgaros?
+            </a>
           </div>
 
         </div>

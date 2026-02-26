@@ -3,7 +3,7 @@ function Navbar() {
     <div className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div className="container">
             <a className="navbar-brand fw-bold" href="inicio">
-                Kefir Natural
+                Kefir Balance
             </a>
             <button
                 className="navbar-toggler"  
