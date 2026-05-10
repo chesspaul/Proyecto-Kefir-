@@ -1,11 +1,68 @@
+import { useEffect, useState } from "react"
+
 import producto1 from "../assets/producto1.jpeg"
 import producto2 from "../assets/producto2.jpeg"
 import producto3 from "../assets/producto3.jpeg"
-import producto4 from "../assets/producto4.avif"
+import producto4 from "../assets/Producto4.avif"
+import defaultImg from "../assets/default.jpg"
 
-function Productos() {
+const imagenes = [
+  producto1,
+  producto2,
+  producto3,
+  producto4
+]
+
+
+function Productos({ agregarAlCarrito }) {
+  const [productos, setProductos] = useState([])
+
+  useEffect(() => {
+
+    fetch("https://kefir-backend.onrender.com/api/productos")
+      .then(res => res.json())
+      .then(data => setProductos(data))
+      .catch(error => console.log(error))
+
+  }, [])
+
+  const eliminarProducto = async (id) => {
+
+    const confirmar = window.confirm(
+      "¿Seguro que deseas eliminar este producto?"
+    )
+
+    if (!confirmar) return
+
+    try {
+
+      await fetch(
+        `https://kefir-backend.onrender.com/api/productos/${id}`,
+        {
+          method: "DELETE"
+        }
+      )
+
+      setProductos(
+        productos.filter(
+          producto => producto._id !== id
+        )
+      )
+
+      alert("Producto eliminado ")
+
+    } catch (error) {
+
+      console.log(error)
+
+      alert("Error al eliminar ")
+    }
+  }
+
   return (
+
     <section id="productos" className="py-5 bg-light">
+
       <div className="container">
 
         <h2 className="text-center fw-bold mb-5">
@@ -14,90 +71,66 @@ function Productos() {
 
         <div className="row g-4">
 
-          {/* Producto 1 */}
-          <div className="col-md-6 col-lg-3">
-            <div className="card shadow-sm h-100 producto-card">
-              <img src={producto1} className="card-img-top" alt="Plástico 1L" />
-              <div className="card-body text-center">
-                <h5 className="card-title">Botella de Plástico 1 Litro</h5>
-                
-                <p className="text-muted small">
-                  Presentación ideal para consumir en familia.
-                </p>
+          {productos.map((producto, index) => (
 
-                <p className="text-success fw-bold fs-5">$110 MXN</p>
+            <div
+              key={producto._id}
+              className="col-md-6 col-lg-3"
+            >
 
-                <a href="#contacto" className="btn btn-success">
-                  Comprar
-                </a>
+              <div className="card shadow-sm h-100 producto-card">
+
+                <img
+                  src={imagenes[index] || defaultImg}
+                  className="card-img-top"
+                  alt={producto.nombre}
+                />
+
+                <div className="card-body text-center">
+
+                  <h5 className="card-title">
+                    {producto.nombre}
+                  </h5>
+
+                  <p className="text-muted small">
+                    Material: {producto.material}
+                  </p>
+
+                  <p className="text-muted small">
+                    Volumen: {producto.volumen}
+                  </p>
+
+                  <p className="text-success fw-bold fs-5">
+                    ${producto.precio} MXN
+                  </p>
+                  <button
+                     className="btn btn-success"
+                      onClick={() => agregarAlCarrito(producto)}
+                  >
+                     Comprar
+                  </button>
+                  <button
+                    className="btn btn-danger mt-2"
+                    onClick={() => eliminarProducto(producto._id)}
+                  >
+                    Eliminar
+                  </button>
+
+                </div>
+
               </div>
+
             </div>
-          </div>
 
-          {/* Producto 2 */}
-          <div className="col-md-6 col-lg-3">
-            <div className="card shadow-sm h-100 producto-card">
-              <img src={producto2} className="card-img-top" alt="Vidrio 1L" />
-              <div className="card-body text-center">
-                <h5 className="card-title">Botella de Vidrio 1 Litro</h5>
-
-                <p className="text-muted small">
-                  Presentación premium del kéfir. Logra conservar mejor la frescura y sabor.
-                </p>
-
-                <p className="text-success fw-bold fs-5">$150 MXN</p>
-
-                <a href="#contacto" className="btn btn-success">
-                  Comprar
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Producto 3 */}
-          <div className="col-md-6 col-lg-3">
-            <div className="card shadow-sm h-100 producto-card">
-              <img src={producto3} className="card-img-top" alt="Vidrio 500ml" />
-              <div className="card-body text-center">
-                <h5 className="card-title">Botella de Vidrio 500 ml</h5>
-
-                <p className="text-muted small">
-                  Tamaño individual ideal para consumo diario.
-                </p>
-
-                <p className="text-success fw-bold fs-5">$80 MXN</p>
-
-                <a href="#contacto" className="btn btn-success">
-                  Comprar
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Producto 4 */}
-          <div className="col-md-6 col-lg-3">
-            <div className="card shadow-sm h-100 producto-card">
-              <img src={producto4} className="card-img-top" alt="Plástico 500ml" />
-              <div className="card-body text-center">
-                <h5 className="card-title">Botella de Plástico 500 ml</h5>
-
-                <p className="text-muted small">
-                  Opción ligera y práctica para llevar y disfrutar.
-                </p>
-
-                <p className="text-success fw-bold fs-5">$65 MXN</p>
-
-                <a href="#contacto" className="btn btn-success">
-                  Comprar
-                </a>
-              </div>
-            </div>
-          </div>
+          ))}
 
         </div>
+
       </div>
+
     </section>
   )
 }
 
 export default Productos
+

@@ -93,4 +93,4 @@ const Insumo = () => {
   )
 }
 
-export default Insumo
+export default Insumo 
