@@ -1,6 +1,17 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { getAuthHeader, getUserFromLocalStorage } from "../utils/auth"
 
 const Admin = () => {
+  const navigate = useNavigate()
+  const usuario = getUserFromLocalStorage()
+
+  // Validar que el usuario sea admin
+  useEffect(() => {
+    if (!usuario || !usuario.isAdmin) {
+      navigate("/")
+    }
+  }, [usuario, navigate])
 
   const [productos, setProductos] = useState([])
 
@@ -52,12 +63,15 @@ const Admin = () => {
         "https://kefir-backend.onrender.com/api/productos",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: getAuthHeader(),
           body: JSON.stringify(nuevoProducto)
         }
       )
+
+      if (!respuesta.ok) {
+        const errorData = await respuesta.json()
+        throw new Error(errorData.message || `Error ${respuesta.status}`)
+      }
 
       const data = await respuesta.json()
 
@@ -74,21 +88,32 @@ const Admin = () => {
     } catch (error) {
 
       console.log(error)
-
-      alert("Error ❌")
+      alert("Error: " + error.message)
     }
   }
 
   const eliminarProducto = async (id) => {
 
+    const confirmar = window.confirm(
+      "¿Seguro que deseas eliminar este producto?"
+    )
+
+    if (!confirmar) return
+
     try {
 
-      await fetch(
+      const respuesta = await fetch(
         `https://kefir-backend.onrender.com/api/productos/${id}`,
         {
-          method: "DELETE"
+          method: "DELETE",
+          headers: getAuthHeader()
         }
       )
+
+      if (!respuesta.ok) {
+        const errorData = await respuesta.json()
+        throw new Error(errorData.message || `Error ${respuesta.status}`)
+      }
 
       setProductos(
         productos.filter(
@@ -96,9 +121,12 @@ const Admin = () => {
         )
       )
 
+      alert("Producto eliminado ✅")
+
     } catch (error) {
 
       console.log(error)
+      alert("Error: " + error.message)
     }
   }
 
@@ -109,6 +137,13 @@ const Admin = () => {
       <h2 className="text-center mb-5 fw-bold">
         Panel Administrador
       </h2>
+
+      <a 
+        href="/Proyecto-Kefir-/" 
+        className="btn btn-dark mb-4"
+      >
+        ← Volver a la tienda
+      </a>
 
       <form
         className="card p-4 shadow mb-5"

@@ -1,6 +1,20 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { clearLocalStorage } from "../utils/auth"
 
-function Navbar({ carrito = [] }) {
+function Navbar({ carrito = [], usuario, setUsuario, vaciarCarrito }) {
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    clearLocalStorage()
+    setUsuario(null)
+    vaciarCarrito()
+    navigate("/")
+    window.location.reload()
+  }
+
+  const handleCarrito = () => {
+    navigate("/carrito")
+  }
 
   return (
 
@@ -49,30 +63,57 @@ function Navbar({ carrito = [] }) {
               </a>
             </li>
 
-            {/* ADMIN */}
-
-            <li className="nav-item">
-
-              <Link
-                className="nav-link text-warning fw-bold"
-                to="/admin"
-              >
-                Admin
-              </Link>
-
-            </li>
-
             {/* CARRITO */}
 
             <li className="nav-item ms-3">
 
-              <span className="btn btn-success">
+              <button onClick={handleCarrito} className="btn btn-success">
 
                 🛒 Carrito ({carrito.length})
 
-              </span>
+              </button>
 
             </li>
+
+            {/* ADMIN Y AUTENTICACIÓN */}
+
+            {!usuario ? (
+              <>
+                <li className="nav-item ms-2">
+                  <a href="/login" className="btn btn-outline-light">
+                    Login
+                  </a>
+                </li>
+                <li className="nav-item ms-2">
+                  <a href="/registro" className="btn btn-outline-success">
+                    Registro
+                  </a>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item ms-3">
+                  <span className="text-white">
+                    👤 {usuario.nombre}
+                  </span>
+                </li>
+                {usuario.isAdmin && (
+                  <li className="nav-item ms-2">
+                    <a href="/admin" className="btn btn-warning">
+                      Admin
+                    </a>
+                  </li>
+                )}
+                <li className="nav-item ms-2">
+                  <button
+                    onClick={handleLogout}
+                    className="btn btn-danger"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            )}
 
           </ul>
 

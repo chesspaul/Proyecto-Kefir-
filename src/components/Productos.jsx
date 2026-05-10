@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { getAuthHeader } from "../utils/auth"
 
 import producto1 from "../assets/producto1.jpeg"
 import producto2 from "../assets/producto2.jpeg"
@@ -13,8 +14,7 @@ const imagenes = [
   producto4
 ]
 
-
-function Productos({ agregarAlCarrito }) {
+function Productos({ agregarAlCarrito, usuario }) {
   const [productos, setProductos] = useState([])
 
   useEffect(() => {
@@ -36,12 +36,18 @@ function Productos({ agregarAlCarrito }) {
 
     try {
 
-      await fetch(
+      const respuesta = await fetch(
         `https://kefir-backend.onrender.com/api/productos/${id}`,
         {
-          method: "DELETE"
+          method: "DELETE",
+          headers: getAuthHeader()
         }
       )
+
+      if (!respuesta.ok) {
+        const errorData = await respuesta.json()
+        throw new Error(errorData.message || `Error ${respuesta.status}`)
+      }
 
       setProductos(
         productos.filter(
@@ -49,13 +55,12 @@ function Productos({ agregarAlCarrito }) {
         )
       )
 
-      alert("Producto eliminado ")
+      alert("Producto eliminado ✅")
 
     } catch (error) {
 
       console.log(error)
-
-      alert("Error al eliminar ")
+      alert("Error: " + error.message)
     }
   }
 
@@ -109,12 +114,14 @@ function Productos({ agregarAlCarrito }) {
                   >
                      Comprar
                   </button>
-                  <button
-                    className="btn btn-danger mt-2"
-                    onClick={() => eliminarProducto(producto._id)}
-                  >
-                    Eliminar
-                  </button>
+                  {usuario?.isAdmin && (
+                    <button
+                      className="btn btn-danger mt-2"
+                      onClick={() => eliminarProducto(producto._id)}
+                    >
+                      Eliminar
+                    </button>
+                  )}
 
                 </div>
 
