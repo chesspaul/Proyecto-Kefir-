@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom"
+
 function Carrito({ carrito, eliminarDelCarrito }) {
+
+  const navigate = useNavigate()
 
   const total = carrito.reduce(
     (acc, producto) => acc + producto.precio,
@@ -19,7 +23,7 @@ function Carrito({ carrito, eliminarDelCarrito }) {
           carrito.length === 0 ? (
             <div className="alert alert-info">
               <p>No hay productos en el carrito</p>
-              <a href="/" className="btn btn-primary">Volver a la tienda</a>
+              <button onClick={() => navigate("/")} className="btn btn-primary">Volver a la tienda</button>
             </div>
           ) : (
             <>

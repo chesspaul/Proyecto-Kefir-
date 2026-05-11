@@ -26,7 +26,7 @@ const Login = ({ setUsuario }) => {
         isAdmin: data.isAdmin
       })
       
-      alert("¡Login exitoso! ✅")
+      alert("¡Login exitoso! ")
       navigate("/")
       
     } catch (err) {
@@ -86,7 +86,7 @@ const Login = ({ setUsuario }) => {
               </form>
 
               <p className="text-center mt-3">
-                ¿No tienes cuenta? <a href="/registro">Regístrate aquí</a>
+                ¿No tienes cuenta? <button onClick={() => navigate("/registro")} style={{ background: "none", border: "none", color: "#0d6efd", textDecoration: "underline", cursor: "pointer" }}>Regístrate aquí</button>
               </p>
             </div>
           </div>

@@ -16,6 +16,18 @@ function Navbar({ carrito = [], usuario, setUsuario, vaciarCarrito }) {
     navigate("/carrito")
   }
 
+  const handleLogin = () => {
+    navigate("/login")
+  }
+
+  const handleRegistro = () => {
+    navigate("/registro")
+  }
+
+  const handleAdmin = () => {
+    navigate("/admin")
+  }
+
   return (
 
     <div className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -80,14 +92,14 @@ function Navbar({ carrito = [], usuario, setUsuario, vaciarCarrito }) {
             {!usuario ? (
               <>
                 <li className="nav-item ms-2">
-                  <a href="/login" className="btn btn-outline-light">
+                  <button onClick={handleLogin} className="btn btn-outline-light">
                     Login
-                  </a>
+                  </button>
                 </li>
                 <li className="nav-item ms-2">
-                  <a href="/registro" className="btn btn-outline-success">
+                  <button onClick={handleRegistro} className="btn btn-outline-success">
                     Registro
-                  </a>
+                  </button>
                 </li>
               </>
             ) : (
@@ -99,9 +111,9 @@ function Navbar({ carrito = [], usuario, setUsuario, vaciarCarrito }) {
                 </li>
                 {usuario.isAdmin && (
                   <li className="nav-item ms-2">
-                    <a href="/admin" className="btn btn-warning">
+                    <button onClick={handleAdmin} className="btn btn-warning">
                       Admin
-                    </a>
+                    </button>
                   </li>
                 )}
                 <li className="nav-item ms-2">

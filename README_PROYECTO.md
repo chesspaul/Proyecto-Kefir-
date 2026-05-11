@@ -172,7 +172,7 @@ npm install
 npm run dev
 
 # Acceder a
-http://localhost:5173/Proyecto-Kefir-/
+http://localhost:5173/
 ```
 
 ### **Build para producción**
@@ -195,15 +195,15 @@ npm run deploy
 ### **Públicas**
 | Ruta | Componente | Descripción |
 |------|-----------|-------------|
-| `/` | App (home) | Página principal |
-| `/login` | Login | Formulario de login |
-| `/registro` | Register | Formulario de registro |
-| `/carrito` | Carrito | Ver carrito de compras |
+| `/#/` | App (home) | Página principal |
+| `/#/login` | Login | Formulario de login |
+| `/#/registro` | Register | Formulario de registro |
+| `/#/carrito` | Carrito | Ver carrito de compras |
 
 ### **Protegidas (Admin)**
 | Ruta | Componente | Requisito |
 |------|-----------|----------|
-| `/admin` | Admin | Logueado + isAdmin=true |
+| `/#/admin` | Admin | Logueado + isAdmin=true |
 
 ---
 
@@ -355,15 +355,23 @@ POST   /api/contactos             - Enviar formulario contacto
 ## 🔄 GitHub Pages & Deploy
 
 ### **Configuración actual**
-- ✅ **Base URL:** `/Proyecto-Kefir-/`
+- ✅ **Routing:** Hash routing (`/#/login`, `/#/admin`)
 - ✅ **vite.config.js:** `base: '/Proyecto-Kefir-/'`
-- ✅ **main.jsx:** `basename="/Proyecto-Kefir-"`
+- ✅ **main.jsx:** `HashRouter` (sin basename)
 - ✅ **package.json:** Deploy script configurado
 
 ### **Deploy**
 ```bash
 npm run deploy
 # Sube a: https://chesspaul.github.io/Proyecto-Kefir-/
+```
+
+### **Acceso a rutas**
+```
+Home:     https://chesspaul.github.io/Proyecto-Kefir-/
+Login:    https://chesspaul.github.io/Proyecto-Kefir-/#/login
+Admin:    https://chesspaul.github.io/Proyecto-Kefir-/#/admin
+Carrito:  https://chesspaul.github.io/Proyecto-Kefir-/#/carrito
 ```
 
 ---

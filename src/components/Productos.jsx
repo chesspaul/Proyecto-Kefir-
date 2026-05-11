@@ -55,7 +55,7 @@ function Productos({ agregarAlCarrito, usuario }) {
         )
       )
 
-      alert("Producto eliminado ✅")
+      alert("Producto eliminado ")
 
     } catch (error) {
 

@@ -33,7 +33,7 @@ const Contacto = () => {
 
       console.log(data)
 
-      alert("Mensaje enviado correctamente ✅")
+      alert("Mensaje enviado correctamente ")
 
       setNombre("")
       setEmail("")
@@ -43,7 +43,7 @@ const Contacto = () => {
 
       console.log(error)
 
-      alert("Hubo un error ❌")
+      alert("Hubo un error ")
     }
   }
 

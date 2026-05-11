@@ -77,7 +77,7 @@ const Admin = () => {
 
       setProductos([...productos, data])
 
-      alert("Producto agregado ✅")
+      alert("Producto agregado ")
 
       setNombre("")
       setPrecio("")
@@ -138,12 +138,12 @@ const Admin = () => {
         Panel Administrador
       </h2>
 
-      <a 
-        href="/Proyecto-Kefir-/" 
+      <button
+        onClick={() => navigate("/")}
         className="btn btn-dark mb-4"
       >
         ← Volver a la tienda
-      </a>
+      </button>
 
       <form
         className="card p-4 shadow mb-5"
